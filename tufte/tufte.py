@@ -1,3 +1,5 @@
+from __future__ import division
+from builtins import str
 import warnings
 
 import numpy as np
@@ -17,12 +19,12 @@ params = {#'figure.dpi' : 200,
           'lines.antialiased' : True,
           'savefig.facecolor' : 'white'}
 
-for (k, v) in params.iteritems():
+for (k, v) in params.items():
     plt.rcParams[k] = v
 
 
 def plot_style(ax, plot_type):
-    ax.tick_params(axis='both', top='off', bottom='off', left='off', right='off', colors='#4B4B4B', pad=10)
+    ax.tick_params(axis='both', top=False, bottom=False, left=False, right=False, colors='#4B4B4B', pad=10)
     ax.xaxis.label.set_color('#4B4B4B')
     ax.yaxis.label.set_color('#4B4B4B')
     ax.spines['top'].set_visible(False)
@@ -34,7 +36,7 @@ def plot_style(ax, plot_type):
     elif plot_type.lower() == 'bplot':
         ax.spines['left'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
-        ax.tick_params(axis='y', left='on')
+        ax.tick_params(axis='y', left=True)
     elif plot_type.lower() in ('line', 'scatter'):
         ax.spines['left'].set_linewidth(0.75)
         ax.spines['bottom'].set_linewidth(0.75)
@@ -75,7 +77,7 @@ def range_frame(fontsize, ax, x=None, y=None, dimension='both', is_bar=False):
         xmax = x.max().max()
         xlower = xmin - ((xmax - xmin) * PAD)
         xupper = xmax + ((xmax - xmin) * PAD)
-        ax.set_xlim(xmin=xlower, xmax=xupper)
+        ax.set_xlim(xlower, xupper)
         ax.spines['bottom'].set_bounds(xmin, xmax)
         xlabels = [xl for xl in ax.xaxis.get_majorticklocs() if xl > xmin and xl < xmax]
         xlabels = [xmin] + xlabels + [xmax]
@@ -89,12 +91,12 @@ def range_frame(fontsize, ax, x=None, y=None, dimension='both', is_bar=False):
         ylower = ymin - ((ymax - ymin) * PAD)
         yupper = ymax + ((ymax - ymin) * PAD)
         if is_bar:
-            ax.set_ylim(ymin=0, ymax=yupper) 
+            ax.set_ylim(0, yupper)
             ax.spines['left'].set_bounds(0, ymax)
             ylabels = [yl for yl in ax.yaxis.get_majorticklocs() if yl < ymax]
             ylabels = ylabels + [ymax]
         else:
-            ax.set_ylim(ymin=ylower, ymax=yupper) 
+            ax.set_ylim(ylower, yupper)
             ax.spines['left'].set_bounds(ymin, ymax)
             ylabels = [yl for yl in ax.yaxis.get_majorticklocs() if yl > ymin and yl < ymax]
             ylabels = [ymin] + ylabels + [ymax]
@@ -106,7 +108,7 @@ def range_frame(fontsize, ax, x=None, y=None, dimension='both', is_bar=False):
 def auto_rotate_xticklabel(fig, ax):
     figw = fig.get_figwidth()
     nticks = len(ax.xaxis.get_majorticklocs())
-    tick_spacing = (figw / float(nticks))
+    tick_spacing = figw / float(nticks)
     font_size = [v.get_fontsize() for v in ax.xaxis.get_majorticklabels()][0]
     FONT_RATE = 0.01
     char_width = font_size * FONT_RATE
@@ -192,7 +194,7 @@ def bar(position, height, df=None, label=None, figsize=(16, 8), align='center', 
     yticklocs = convert_ticks(height, yticklocs)
     for y in yticklocs:
         ax.plot([xlist[0], xlist[-1]], [y, y], color=gridcolor, linewidth=1.25)
-    ax.set_xlim(xmin=xlist[0], xmax=xlist[-1])
+    ax.set_xlim(xlist[0], xlist[-1])
     if label is None:
         pass
     elif type(label) in (list, np.ndarray, pd.Series):
