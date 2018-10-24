@@ -1,15 +1,25 @@
 # Tufte in Python
 
-See the [Jupyter notebook](https://github.com/juanshishido/tufte/blob/master/tufte-in-python.ipynb) for more details.
-
-A set of four plots based on Edward R. Tufte's designs in _The Visual Display of Quantitative Information_:
+Four plots based on Edward R. Tufte's designs in _The Visual Display of Quantitative Information_:
 
 * bar
 * boxplot
 * line
 * scatter
 
-All of these plots aim to maximize _data-ink_, the "non-erasable core of a graphic." 
+## Installation
+
+Clone and `cd` into this repo, then do:
+
+~~~bash
+pip install -e .
+~~~
+
+## Usage
+
+See the [Jupyter notebook](https://github.com/juanshishido/tufte/blob/master/tufte-in-python.ipynb) for more details.
+
+All of these plots aim to maximize _data-ink_, the "non-erasable core of a graphic."
 
 ![bar](/images/bar.png)
 
