@@ -120,12 +120,12 @@ def auto_rotate_xticklabel(fig, ax):
     return fig, ax
 
 def to_nparray(container):
-    if type(container) in (list, pd.core.index.Int64Index, pd.Series):
+    if type(container) in (list, pd.Int64Index, pd.Series):
         container = np.array(container)
     elif type(container) is np.ndarray:
         pass
     else:
-        raise TypeError('Container must be of type: list, np.ndarray, pd.core.index.Int64Index, or pd.Series')
+        raise TypeError('Container must be of type: list, np.ndarray, pd.Int64Index, or pd.Series')
     return container
 
 def check_df(x, y, df):
